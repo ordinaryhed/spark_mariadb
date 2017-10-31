@@ -78,4 +78,18 @@ public class Word {
     public void setWord_created(Date word_created) {
         this.word_created = word_created;
     }
+
+    @Override
+    public String toString() {
+        return "Word{" +
+                "word_id=" + word_id +
+                ", word_name='" + word_name + '\'' +
+                ", word_desc='" + word_desc + '\'' +
+                ", word_exam='" + word_exam + '\'' +
+                ", user_alias='" + user_alias + '\'' +
+                ", user_email='" + user_email + '\'' +
+                ", user_city='" + user_city + '\'' +
+                ", word_created=" + word_created +
+                '}';
+    }
 }

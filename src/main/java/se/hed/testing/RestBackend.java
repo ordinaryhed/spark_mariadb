@@ -14,6 +14,17 @@ public class RestBackend {
         BasicConfigurator.configure();
         Gson gs = new Gson();
 
+
+        post("/word", (request, response) -> {
+            response.type("application/json");
+            Word word = new Gson().fromJson(request.body(), Word.class);
+            SlangopediaService.addWord(word);
+
+            return new Gson()
+                    .toJson(new StandardResponse(StatusResponse.SUCCESS));
+        });
+
+
         get("/hello", (req, res) -> "Hello, world");
 
         get("/hello/:name", (req, res) -> {

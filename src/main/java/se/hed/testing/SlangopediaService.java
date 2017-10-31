@@ -23,6 +23,27 @@ public class SlangopediaService {
         }
     }
 
+    public static void addWord(Word word) {
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            conn = getConnection();
+            ResultSetHandler<Word> h = new BeanHandler<Word>(Word.class);
+            String INSERT = "INSERT INTO WORD (word_name, word_desc, word_exam, user_alias, user_email, user_city) VALUES (?,?,?,?,?,?)";
+            new QueryRunner().insert(conn, INSERT,h, word.word_name, word.word_desc, word.word_exam, word.user_alias, word.user_email, word.user_city);
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            try { if (stmt != null) { conn.close();} } catch (SQLException se) { }
+            try { if (conn != null) { conn.close();} } catch (SQLException se) { se.printStackTrace(); }
+        }
+    }
 
     public static Word getWord(int id) {
 
